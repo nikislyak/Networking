@@ -104,6 +104,20 @@ extension Network {
         public let decoder: JSONDecoder
         public let encoder: JSONEncoder
         public let retriers: Retriers?
+        
+        public init(
+            urlSession: URLSessionProtocol,
+            baseUrl: URL,
+            decoder: JSONDecoder,
+            encoder: JSONEncoder,
+            retriers: Network.Environment.Retriers?
+        ) {
+            self.urlSession = urlSession
+            self.baseUrl = baseUrl
+            self.decoder = decoder
+            self.encoder = encoder
+            self.retriers = retriers
+        }
     }
 }
 
@@ -111,5 +125,13 @@ extension Network.Environment {
     public struct Retriers {
         public let responseValidator: NetworkResponseValidator
         public let requestRestorer: RequestRestorer
+        
+        public init(
+            responseValidator: NetworkResponseValidator,
+            requestRestorer: RequestRestorer
+        ) {
+            self.responseValidator = responseValidator
+            self.requestRestorer = requestRestorer
+        }
     }
 }
