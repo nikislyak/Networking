@@ -16,6 +16,7 @@
 		393CA09823E2261B00EBA527 /* XCTestCase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393CA09423E2261B00EBA527 /* XCTestCase+Extensions.swift */; };
 		393CA09923E2261B00EBA527 /* Publisher+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393CA09523E2261B00EBA527 /* Publisher+Extensions.swift */; };
 		393CA09A23E2261B00EBA527 /* NetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393CA09723E2261B00EBA527 /* NetworkTests.swift */; };
+		393CA09E23E22C0100EBA527 /* URLSession+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393CA09D23E22C0100EBA527 /* URLSession+Protocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 		393CA09423E2261B00EBA527 /* XCTestCase+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Extensions.swift"; sourceTree = "<group>"; };
 		393CA09523E2261B00EBA527 /* Publisher+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Publisher+Extensions.swift"; sourceTree = "<group>"; };
 		393CA09723E2261B00EBA527 /* NetworkTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkTests.swift; sourceTree = "<group>"; };
+		393CA09D23E22C0100EBA527 /* URLSession+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Protocol.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				393CA08B23E225DD00EBA527 /* RequestBuilder.swift */,
 				393CA07423E2255C00EBA527 /* Networking.h */,
 				393CA07523E2255C00EBA527 /* Info.plist */,
+				393CA09D23E22C0100EBA527 /* URLSession+Protocol.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 			files = (
 				393CA08F23E225DD00EBA527 /* RequestBuilder.swift in Sources */,
 				393CA09023E225DD00EBA527 /* IncompleteRequest.swift in Sources */,
+				393CA09E23E22C0100EBA527 /* URLSession+Protocol.swift in Sources */,
 				393CA09223E225DD00EBA527 /* Network.swift in Sources */,
 				393CA09123E225DD00EBA527 /* HTTPMethod.swift in Sources */,
 			);
