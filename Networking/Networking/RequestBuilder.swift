@@ -84,7 +84,7 @@ public struct RequestBuilder {
         .init(
             request: request,
             encoding: encoding,
-            params: .init(self.params.map { $0 } + params.map { $0 }) { first, _ in first }
+            params: .init(self.params.map { $0 } + params.map { $0 }) { _, second in second }
         )
     }
     
@@ -92,7 +92,7 @@ public struct RequestBuilder {
         .init(
             request: request,
             encoding: encoding,
-            params: .init(params.map { $0 } + [(key, value)]) { first, _ in first }
+            params: .init(params.map { $0 } + [(key, value)]) { _, second in second }
         )
     }
     
