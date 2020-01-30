@@ -17,6 +17,8 @@
 		393CA09923E2261B00EBA527 /* Publisher+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393CA09523E2261B00EBA527 /* Publisher+Extensions.swift */; };
 		393CA09A23E2261B00EBA527 /* NetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393CA09723E2261B00EBA527 /* NetworkTests.swift */; };
 		393CA09E23E22C0100EBA527 /* URLSession+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393CA09D23E22C0100EBA527 /* URLSession+Protocol.swift */; };
+		393CA0A023E2F77B00EBA527 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393CA09F23E2F77B00EBA527 /* ParameterEncoding.swift */; };
+		393CA0A223E2FA7A00EBA527 /* URLEncodedFormEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393CA0A123E2FA7A00EBA527 /* URLEncodedFormEncoder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +45,8 @@
 		393CA09523E2261B00EBA527 /* Publisher+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Publisher+Extensions.swift"; sourceTree = "<group>"; };
 		393CA09723E2261B00EBA527 /* NetworkTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkTests.swift; sourceTree = "<group>"; };
 		393CA09D23E22C0100EBA527 /* URLSession+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Protocol.swift"; sourceTree = "<group>"; };
+		393CA09F23E2F77B00EBA527 /* ParameterEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterEncoding.swift; sourceTree = "<group>"; };
+		393CA0A123E2FA7A00EBA527 /* URLEncodedFormEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLEncodedFormEncoder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +93,8 @@
 				393CA08C23E225DD00EBA527 /* IncompleteRequest.swift */,
 				393CA08E23E225DD00EBA527 /* Network.swift */,
 				393CA08B23E225DD00EBA527 /* RequestBuilder.swift */,
+				393CA09F23E2F77B00EBA527 /* ParameterEncoding.swift */,
+				393CA0A123E2FA7A00EBA527 /* URLEncodedFormEncoder.swift */,
 				393CA07423E2255C00EBA527 /* Networking.h */,
 				393CA07523E2255C00EBA527 /* Info.plist */,
 				393CA09D23E22C0100EBA527 /* URLSession+Protocol.swift */,
@@ -233,6 +239,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				393CA0A223E2FA7A00EBA527 /* URLEncodedFormEncoder.swift in Sources */,
+				393CA0A023E2F77B00EBA527 /* ParameterEncoding.swift in Sources */,
 				393CA08F23E225DD00EBA527 /* RequestBuilder.swift in Sources */,
 				393CA09023E225DD00EBA527 /* IncompleteRequest.swift in Sources */,
 				393CA09E23E22C0100EBA527 /* URLSession+Protocol.swift in Sources */,

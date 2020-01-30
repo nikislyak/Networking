@@ -21,8 +21,20 @@ open class Network {
         self.env = env
     }
     
-    public func request<R: Decodable>(path: String) -> IncompleteRequest<R> {
-        .init(network: self, builder: modify(request: .init(baseUrl: env.baseUrl, path: path)))
+    public func request<R: Decodable>(
+        path: String,
+        encoding: ParameterEncoding = URLEncoding()
+    ) -> IncompleteRequest<R> {
+        .init(
+            network: self,
+            builder: modify(
+                request: .init(
+                    baseUrl: env.baseUrl,
+                    path: path,
+                    encoding: encoding
+                )
+            )
+        )
     }
     
     open func modify(request: RequestBuilder) -> RequestBuilder {

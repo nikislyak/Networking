@@ -28,8 +28,12 @@ public struct IncompleteRequest<R: Decodable> {
         .init(network: network, builder: builder.set(kp, value))
     }
     
-    public func param(key: String, value: String) -> Self {
+    public func param<V>(key: String, value: V) -> Self {
         .init(network: network, builder: builder.param(key: key, value: value))
+    }
+    
+    public func params(_ params: [String: Any]) -> Self {
+        .init(network: network, builder: builder.params(params))
     }
     
     public func body(data: Data) -> Self {

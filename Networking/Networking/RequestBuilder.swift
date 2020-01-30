@@ -7,15 +7,27 @@
 
 import Foundation
 
+extension URLRequest {
+    public var method: HTTPMethod? {
+        httpMethod.flatMap { HTTPMethod(rawValue: $0.uppercased()) }
+    }
+}
+
 public struct RequestBuilder {
     private let request: URLRequest
+    private let encoding: ParameterEncoding
+    private let params: [String: Any]
     
-    public init(baseUrl: URL, path: String) {
+    public init(baseUrl: URL, path: String, encoding: ParameterEncoding) {
         self.request = .init(url: baseUrl.appendingPathComponent(path))
+        self.encoding = encoding
+        self.params = [:]
     }
     
-    private init(request: URLRequest) {
+    private init(request: URLRequest, encoding: ParameterEncoding, params: [String: Any]) {
         self.request = request
+        self.encoding = encoding
+        self.params = params
     }
     
     private func withCopy<T>(of smth: T, _ configure: (inout T) -> Void) -> T {
@@ -30,7 +42,9 @@ public struct RequestBuilder {
         .init(
             request: withCopy(of: request) {
                 $0.httpMethod = httpMethod.rawValue
-            }
+            },
+            encoding: encoding,
+            params: params
         )
     }
     
@@ -40,7 +54,9 @@ public struct RequestBuilder {
                 dict.forEach {
                     req.addValue($0.value, forHTTPHeaderField: $0.key)
                 }
-            }
+            },
+            encoding: encoding,
+            params: params
         )
     }
     
@@ -48,7 +64,9 @@ public struct RequestBuilder {
         .init(
             request: withCopy(of: request) {
                 $0.addValue(value, forHTTPHeaderField: key)
-            }
+            },
+            encoding: encoding,
+            params: params
         )
     }
     
@@ -56,23 +74,25 @@ public struct RequestBuilder {
         .init(
             request: withCopy(of: request) {
                 $0[keyPath: kp] = value
-            }
+            },
+            encoding: encoding,
+            params: params
         )
     }
     
-    public func param(key: String, value: String) -> Self {
+    public func params(_ params: [String: Any]) -> Self {
         .init(
-            request: withCopy(of: request) { copy in
-                guard let url = copy.url?.absoluteString else { return }
-                
-                var components = URLComponents(string: url)
-                
-                let oldItems = components?.queryItems ?? []
-                
-                components?.queryItems = oldItems + [.init(name: key, value: value)]
-                
-                copy.url = components?.url
-            }
+            request: request,
+            encoding: encoding,
+            params: .init(self.params.map { $0 } + params.map { $0 }) { first, _ in first }
+        )
+    }
+    
+    public func param<V>(key: String, value: V) -> Self {
+        .init(
+            request: request,
+            encoding: encoding,
+            params: .init(params.map { $0 } + [(key, value)]) { first, _ in first }
         )
     }
     
@@ -80,11 +100,15 @@ public struct RequestBuilder {
         .init(
             request: withCopy(of: request) {
                 $0.httpBody = data
-            }
+            },
+            encoding: encoding,
+            params: params
         )
     }
     
     public func build() -> URLRequest {
-        request
+        withCopy(of: request) { copy in
+            copy = encoding.encode(copy, with: params)
+        }
     }
 }
