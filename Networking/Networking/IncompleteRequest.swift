@@ -40,6 +40,10 @@ public struct IncompleteRequest<R: Decodable> {
         .init(network: network, builder: builder.body(data: data))
     }
     
+    public func body<T: Encodable>(_ value: T) throws -> Self {
+        .init(network: network, builder: builder.body(data: try network.env.bodyEncoder.encode(value)))
+    }
+    
     public func perform() -> AnyPublisher<R, Error> {
         network.perform(request: builder.build())
     }

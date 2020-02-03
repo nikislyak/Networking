@@ -35,6 +35,8 @@ class MockRestorer: RequestRestorer {
 class NetworkTests: XCTestCase {
     let url = URL(string: "https://github.com/")!
     
+    var bodyEncoder: JSONEncoder!
+    var responseDecoder: JSONDecoder!
     var mockValidator: MockValidator!
     var mockRestorer: MockRestorer!
     var mockSession: MockURLSession!
@@ -43,6 +45,8 @@ class NetworkTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
+        bodyEncoder = .init()
+        responseDecoder = .init()
         mockValidator = MockValidator()
         mockRestorer = MockRestorer()
         
@@ -52,8 +56,8 @@ class NetworkTests: XCTestCase {
             env: Network.Environment(
                 urlSession: mockSession,
                 baseUrl: url,
-                decoder: .init(),
-                encoder: .init(),
+                responseDecoder: responseDecoder,
+                bodyEncoder: bodyEncoder,
                 retriers: Network.Environment.Retriers(
                     responseValidator: mockValidator,
                     requestRestorer: mockRestorer
@@ -195,6 +199,21 @@ class NetworkTests: XCTestCase {
                 .param(key: "a", value: "a")
                 .param(key: "b", value: "b")
                 .param(key: "c", value: 8)
+        )
+    }
+    
+    func testBodyEncode() throws {
+        let expected = URLRequest(url: url)
+        
+        let bodyValue = ["a": "a"]
+        
+        let request = network.request(path: "") as IncompleteRequest<String>
+        
+        try assertChangesEqual(
+            try mut(expected) {
+                $0.httpBody = try bodyEncoder.encode(bodyValue)
+            },
+            try request.body(bodyValue)
         )
     }
 }

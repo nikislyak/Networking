@@ -15,7 +15,7 @@ extension URLRequest {
 }
 
 open class Network {
-    private let env: Environment
+    let env: Environment
     
     public init(env: Environment) {
         self.env = env
@@ -69,7 +69,7 @@ open class Network {
                 }
             }
             .map(\.data)
-            .decode(type: R.self, decoder: env.decoder)
+            .decode(type: R.self, decoder: env.responseDecoder)
             .eraseToAnyPublisher()
     }
 }
@@ -113,21 +113,21 @@ extension Network {
     public struct Environment {
         public let urlSession: URLSessionProtocol
         public let baseUrl: URL
-        public let decoder: JSONDecoder
-        public let encoder: JSONEncoder
+        public let responseDecoder: JSONDecoder
+        public let bodyEncoder: JSONEncoder
         public let retriers: Retriers?
         
         public init(
             urlSession: URLSessionProtocol,
             baseUrl: URL,
-            decoder: JSONDecoder,
-            encoder: JSONEncoder,
+            responseDecoder: JSONDecoder,
+            bodyEncoder: JSONEncoder,
             retriers: Network.Environment.Retriers?
         ) {
             self.urlSession = urlSession
             self.baseUrl = baseUrl
-            self.decoder = decoder
-            self.encoder = encoder
+            self.responseDecoder = responseDecoder
+            self.bodyEncoder = bodyEncoder
             self.retriers = retriers
         }
     }
